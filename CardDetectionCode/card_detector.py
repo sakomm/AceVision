@@ -2,6 +2,10 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+def load_grayscale_fast(path):
+    return cv2.imread(f"./FastData/{path}", cv2.IMREAD_GRAYSCALE)
+
+
 def position_image(image):
     """Returns a grayed, blurred, and adaptively thresholded camera image."""
 
@@ -187,3 +191,61 @@ if len(actual_cards) != 0:
         plt.figure()
         plt.imshow(cv2.cvtColor(cards[i], cv2.COLOR_BGR2RGB))
 
+file_names = ['10C.png', '10D.png', '10H.png', '10S.png', '2C.png', '2D.png', '2H.png', '2S.png', '3C.png', '3D.png', '3H.png', '3S.png', '4C.png', '4D.png', '4H.png', '4S.png', '5C.png', '5D.png', '5H.png', '5S.png', '6C.png', '6D.png', '6H.png', '6S.png', '7C.png', '7D.png', '7H.png', '7S.png', '8C.png', '8D.png', '8H.png', '8S.png', '9C.png', '9D.png', '9H.png', '9S.png', 'AC.png', 'AD.png', 'AH.png', 'AS.png', 'JC.png', 'JD.png', 'JH.png', 'JS.png', 'KC.png', 'KD.png', 'KH.png', 'KS.png', 'QC.png', 'QD.png', 'QH.png', 'QS.png']
+
+# logo detection using feature matching
+MIN_MATCH_COUNT = 15 # minimum number of matches to consider the detection valid
+
+# create a SIFT object
+sift = cv2.SIFT_create()
+
+# look through all the images in the FastData folder
+for image in file_names:
+    kp1, des1 = sift.detectAndCompute(load_grayscale('./FastData/'+image), None)
+    # create a list of matches
+    matches = []
+    # look through all the images in the FastData folder
+    im2 = cv2.imread('./FastData/{test_image.png}')
+    kp2, des2 = sift.detectAndCompute(im2, None)
+    FLANN_INDEX_KDTREE = 1
+    index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5) # number of trees
+    search_params = dict(checks = 50) # number of checks
+
+    # create the FLANN object
+    flann = cv2.FlannBasedMatcher(index_params, search_params)
+    matches = flann.knnMatch(des1, des2, k=2)
+
+    good = []
+    for m, n in matches:
+        if m.distance < 0.7*n.distance:
+            good.append(m)
+    
+    if len(good) > MIN_MATCH_COUNT:
+        src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+        dst_pts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+
+        M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+
+        matchesMask = mask.ravel().tolist()
+
+        h, w = load_grayscale_fast(image).shape
+
+        pts = np.float32([[0, 0], [0, h-1], [w-1, h-1], [w-1, 0]]).reshape(-1, 1, 2)
+
+        dst = cv2.perspectiveTransform(pts, M)
+
+        im2 = cv2.polylines(im2, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
+
+    else:
+        print("Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT))
+        matchesMask = None
+
+    draw_params = dict(matchColor = (0, 255, 0), # draw matches in green color
+                    singlePointColor = None,
+                    matchesMask = matchesMask, # draw only inliers
+                    flags = 2)
+    
+    img3 = cv2.drawMatches(load_grayscale_fast(image), kp1, im2, kp2, good, None, **draw_params)
+    plt.imshow(img3, 'gray'), plt.show()
+
+     

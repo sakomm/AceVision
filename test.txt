@@ -1,6 +1,6 @@
 total 3184
 drwxrwxr-x 2 sakomm sakomm   4096 May  8 20:19 .
-drwxrwxr-x 5 sakomm sakomm   4096 May  8 20:26 ..
+drwxrwxr-x 6 sakomm sakomm   4096 May 13 17:29 ..
 -rw-rw-r-- 1 sakomm sakomm  39304 Jul 14  2020 10C.png
 -rw-rw-r-- 1 sakomm sakomm  30498 Jul 14  2020 10D.png
 -rw-rw-r-- 1 sakomm sakomm  29863 Jul 14  2020 10H.png
