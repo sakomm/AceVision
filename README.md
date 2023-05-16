@@ -60,6 +60,21 @@ cd $PROJECT_FOLDER
 python3 -m venv cs482venv
 source cs482venv/bin/activate
 ```
+After setting up the environment, you can install the necessary libraries with the following command:
+```bash
+pip install -r requirements.txt
+```
+The `requirements.txt` file should include the following libraries in order for you to succesfully run the jupyter file:
+
+To add the virtual environment to Jupyter Notebook, use the following command:
+`python -m ipykernel install --user --name=cs482venv --display-name "Python3 (CS482)" `
+
+## Running the Jupyter Notebook:
+`jupyter notebook`
+
+Please replace `$PROJECT_FOLDER` with the path to your project folder.
+
+
 ## Data Sources
 
 | Link | Description |
