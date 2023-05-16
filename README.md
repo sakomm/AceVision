@@ -48,3 +48,13 @@
 | [Link2](URL2) | Description of Link2 |
 | [Link3](URL3) | Description of Link3 |
 
+## Literature Survey
+
+Below are some of the key literature and resources we referred to for this project:
+
+| Title | Author(s) | Link | Key Findings |
+|-------|-----------|------|--------------|
+| Title1 | Author1 | [Link1](URL1) | Brief summary of key findings from source 1 |
+| Title2 | Author2 | [Link2](URL2) | Brief summary of key findings from source 2 |
+| Title3 | Author3 | [Link3](URL3) | Brief summary of key findings from source 3 |
+
