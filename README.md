@@ -40,6 +40,26 @@
 
 - The completed poker program will be able to decide whether to bet or fold based on the calculated likelihood of the current hand winning.
 
+
+## Environment Setup and Requirements
+
+## Python Setup
+
+We will be using Python 3 for this project. If you don't have Python 3 installed, you can install it based on your operating system:
+
+- **Mac**: Using the Homebrew package manager, you can install Python 3 with `brew install python3`.
+- **Linux**: On Debian systems, you can install Python 3 with `sudo apt install python3`.
+
+After installing Python 3, we recommend setting up a Python virtual environment for the project. Here's how you can do it:
+
+```bash
+# Move to the project folder
+cd $PROJECT_FOLDER
+
+# Create a virtual environment and activate it
+python3 -m venv cs482venv
+source cs482venv/bin/activate
+```
 ## Data Sources
 
 | Link | Description |
