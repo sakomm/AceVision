@@ -70,7 +70,7 @@ To add the virtual environment to Jupyter Notebook, use the following command:
 `python -m ipykernel install --user --name=cs482venv --display-name "Python3 (CS482)" `
 
 ## Running the Jupyter Notebook:
-To run the jupyter file type `jupyter notebook` in your terminal. 
+To run the jupyter file use `jupyter notebook` in your terminal. 
 
 Please replace `$PROJECT_FOLDER` with the path to your project folder.
 
