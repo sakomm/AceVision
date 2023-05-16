@@ -165,8 +165,10 @@ def flatten(image, pts, w, h):
     warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
 
-        
+    # only return the top [52:265, 34:106]
+    warp = warp[52:265, 34:106]
 
+    
     return warp
 
 
@@ -195,14 +197,39 @@ def imageLoader():
 # cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
 url = "http://192.168.0.180:8080/shot.jpg"
 
-matches = imageLoader()
+dataMatch = imageLoader()
 
 # print(len(matches))
 
-def card_detect(image, matches = matches):
+def card_detect(image, matches = dataMatch):
+    sift = cv2.SIFT_create()
 
-    
+    #conver the np array to image
+    card = cv2.imread(image)
 
+    # card= cv2.imread() 
+
+    kp_image, desc_image = sift.detectAndCompute(card, None)
+
+    for logo in dataMatch:
+
+        kp_comp , desc_comp = sift.detectAndCompute(logo, None)
+        index_params = dict(algorithm=1, tree = 5)
+        search_params = dict(checks = 10)
+
+        flann = cv2.FlannBasedMatcher(index_params, search_params)
+        matches = flann.knnMatch(desc_image, desc_comp, k=2)
+
+        good_points = []
+        for m, n in matches:
+            if m.distance < 0.55*n.distance:
+                good_points.append(m)
+
+        img3 = cv2.drawMatches(card, kp_image, logo, kp_comp, good_points, None)
+        cv2.imshow("image", img3)
+
+
+    return len(good_points)
 
 
 while True:
@@ -226,13 +253,13 @@ while True:
 
     # Find and sort the contours of all cards in the frame
     actual_cards = detect_cards(pre_proc)
-    print(actual_cards)
+    # print(actual_cards)
 
-    for card in actual_cards:
-
-
-
-
+    if len(actual_cards) != 0:
+        for card in actual_cards:
+            print (card)
+            # cv2.imshow('card', card)
+            # card_detect(np.array(card))
 
     # Display the number of cards detected on the frame
     cv2.putText(frame, "Cards detected: " + str(len(actual_cards)), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
