@@ -84,7 +84,7 @@ If you are still having trouble, The full environment setup document is availabl
 
 | Link | Description |
 |------|-------------|
-| [Link1](URL1) | Description of Link1 |
+| [OpenCV Card Detector](https://github.com/EdjeElectronics/OpenCV-Playing-Card-Detector/blob/master/Cards.py) | Detection code for the cards was sourced here |
 | [Link2](URL2) | Description of Link2 |
 | [Link3](URL3) | Description of Link3 |
 
@@ -97,4 +97,3 @@ Below are some of the key literature and resources we referred to for this proje
 | Title1 | Author1 | [Link1](URL1) | Brief summary of key findings from source 1 |
 | Title2 | Author2 | [Link2](URL2) | Brief summary of key findings from source 2 |
 | Title3 | Author3 | [Link3](URL3) | Brief summary of key findings from source 3 |
-
