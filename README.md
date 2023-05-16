@@ -8,6 +8,9 @@
 | Shafiullah Hashimi | shashim5@gmu.edu|
 | Reza Khoshhal      | rkhoshha@gmu.edu|
 
+## Project Proposal 
+- The project proposal can be found [here](https://docs.google.com/document/d/15ecoP3ZsK5myAPOcKUsPFbqGT3KCkJQoNnVF8iDrlcQ/).
+
 ## Motivation and Background
 
 - This project aims to detect and identify playing cards on a Texas Holdem poker table using computer vision techniques and calculate the odds of having a winning hand.
