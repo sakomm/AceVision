@@ -39,3 +39,12 @@
 ### Outcome
 
 - The completed poker program will be able to decide whether to bet or fold based on the calculated likelihood of the current hand winning.
+
+## Data Sources
+
+| Link | Description |
+|------|-------------|
+| [Link1](URL1) | Description of Link1 |
+| [Link2](URL2) | Description of Link2 |
+| [Link3](URL3) | Description of Link3 |
+
