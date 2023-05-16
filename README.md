@@ -85,8 +85,8 @@ If you are still having trouble, The full environment setup document is availabl
 | Link | Description |
 |------|-------------|
 | [OpenCV Card Detector](https://github.com/EdjeElectronics/OpenCV-Playing-Card-Detector/blob/master/Cards.py) | Detection code for the cards was sourced here |
-| [Link2](URL2) | Description of Link2 |
-| [Link3](URL3) | Description of Link3 |
+| [Poker Hand Image Recognition](https://samyzaf.com/ML/poker2/poker2.html) | The provided link leads to a webpage showcasing a machine learning model trained to detect poker hands from images. |
+| [Poker ML](https://github.com/sagor999/poker_ml) | The provided link showcases a machine learning model designed to recognize and classify poker hands from images. |
 
 ## Literature Survey
 
@@ -94,6 +94,6 @@ Below are some of the key literature and resources we referred to for this proje
 
 | Title | Author(s) | Link | Key Findings |
 |-------|-----------|------|--------------|
-| Title1 | Author1 | [Link1](URL1) | Brief summary of key findings from source 1 |
-| Title2 | Author2 | [Link2](URL2) | Brief summary of key findings from source 2 |
-| Title3 | Author3 | [Link3](URL3) | Brief summary of key findings from source 3 |
+| Rain Man 2.0 - Blackjack Robot | J. Grillo | [Blackjack Robot](https://hackaday.io/project/27639-rain-man-20-blackjack-robot.) | The project showcases a Raspberry Pi-based robot that can identify cards in its own hand and the dealer's hand, use a table to determine optimal plays, and employ card counting strategies. Although focused on blackjack, the card detection capability demonstrated with a 99% match rate provides insights applicable to our poker project.|
+| A method of computing winning probability for Texas Hold'em poker| Z. Xiaochuan, D. Song, Z. Hailu, L. He, W. Fan | [Computing Probability for Hold'em]([URL2](http://www.ijmlc.org/papers/275-LC009.pdf)) | The study presents an algorithm for computing winning probability in Texas Hold'em poker. It involves linear regression to approximate effective hand strength and classification of 5 or 6 cards to generate a feature vector. The algorithm and techniques such as reinforcement learning (RL), Q-learning, and Deep Q-Networks have potential for improving decision-making and training accuracy in our project. |
+| Image information and visual quality | H.R. Sheikh | [Image Recognition](https://ieeexplore.ieee.org/abstract/document/1576816?casa_token=DxQnaal5t3AAAAAA:wQq0qZWCt-_YJic-zXD-OxRedXb5AdJQtD1TspsTfOvGwCQKTly1e57sq51XhXep6tZXaWUI) | The provided link leads to an IEEE abstract discussing a method for hand strength evaluation in Texas Hold'em poker. The approach utilizes a machine learning algorithm trained on historical data to predict the winning probability of a poker hand, offering potential insights for our project. |
