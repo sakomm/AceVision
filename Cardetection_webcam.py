@@ -201,6 +201,8 @@ matches = imageLoader()
 
 def card_detect(image, matches = matches):
 
+    
+
 
 
 while True:
@@ -227,6 +229,9 @@ while True:
     print(actual_cards)
 
     for card in actual_cards:
+
+
+
 
 
     # Display the number of cards detected on the frame
