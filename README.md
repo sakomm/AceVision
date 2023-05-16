@@ -1,4 +1,12 @@
 # Project: Texas Holdem Poker Odds Calculator
+## Team Information
+
+| Team Members       | Email Address   |
+|--------------------|-----------------|
+| Kevin Daniel       | kdanie4@gmu.edu |
+| Saianurag Kommuri  | skommur@gmu.edu |
+| Shafiullah Hashimi | shashim5@gmu.edu|
+| Reza Khoshhal      | rkhoshha@gmu.edu|
 
 ## Motivation and Background
 
