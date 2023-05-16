@@ -74,6 +74,8 @@ To add the virtual environment to Jupyter Notebook, use the following command:
 
 Please replace `$PROJECT_FOLDER` with the path to your project folder.
 
+If you are still having trouble, The full environment setup document is available [here](./CS482%20Computer%20Vision%20-%20Python%20Getting%20Started.pdf).
+
 
 ## Data Sources
 
