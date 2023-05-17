@@ -1,20 +1,13 @@
-import os
-import time
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import requests
-import imutils
 
-BKG_THRESH =90
-CARD_MAX_AREA = 120000
+BKG_THRESH = 90
+CARD_MAX_AREA = 3000000
 CARD_MIN_AREA = 25000
-
-
 def position_image(image):
     """Returns a grayed, blurred, and adaptively thresholded camera image."""
 
-    #invalid number of channels in input image error 
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray,(5,5),0)
 
@@ -30,8 +23,10 @@ def position_image(image):
     img_w, img_h = np.shape(image)[:2]
     bkg_level = gray[int(img_h/100)][int(img_w/2)]
     thresh_level = bkg_level + BKG_THRESH
+    print(thresh_level)
 
     retval, thresh = cv2.threshold(blur,thresh_level,255,cv2.THRESH_BINARY)
+    print(thresh)
     
     return thresh
 
@@ -41,9 +36,7 @@ def detect_cards(thresh_image):
     from largest to smallest."""
 
     # Find contours and sort their indices by contour size
-    # cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cnts,hier = cv2.findContours(thresh_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-
+    cnts,hier = cv2.findContours(thresh_image,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     index_sort = sorted(range(len(cnts)), key=lambda i : cv2.contourArea(cnts[i]),reverse=True)
 
     # If there are no contours, do nothing
@@ -167,118 +160,36 @@ def flatten(image, pts, w, h):
     warp = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     warp = cv2.cvtColor(warp,cv2.COLOR_BGR2GRAY)
 
-    # only return the top [52:265, 34:106]
-    warp = warp[52:265, 34:106]
+        
 
-    
     return warp
+   
+#Load in tester image here from filepath
+image = cv2.imread("/home/sakomm/Documents/Documents/School/CS482/AceVision/CardDetectionCode/test_image.png")
 
+# Start timer (for calculating frame rate)
 
-def imageLoader():
-    """Uses template matching to identify if the image contains a logo.
-    Returns True if a logo is found, False if not."""
+# Pre-process camera image (gray, blur, and threshold it)
+pre_proc = position_image(image)
+plt.imshow(pre_proc)
 
-    # load all the images ind FastData folder
-    # and store them in a list
-    images = []
-    for filename in os.listdir('FastData'):
-        img = cv2.imread(os.path.join('FastData',filename))
-        # convert to gray scale
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        if img is not None:
-            images.append(img)
+# Find and sort the contours of all cards in the image (query cards)
+actual_cards = detect_cards(pre_proc)
+print(actual_cards)
+
+# If there are no contours, do nothing
+if len(actual_cards) != 0:
+    # Initialize a new "cards" list to assign the card objects.
+    # k indexes the newly made array of cards.
+    cards = []
+    k = 0
+
+    # For each contour detected, the function below returns a 
+    #straightened out snapshot of the card. This is all stored in the cards array
+    for i in range(len(actual_cards)):
+        cards.append(return_card(actual_cards[i],image))
         
-    return images 
-
-    # ... function implementation ...
-
-# Create a video capture object
-
-# cap = cv2.VideoCapture(0)  # Change the argument to the appropriate video source (0 for webcam)
-# flip the iamge horizontally for ease of use
-# cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
-url = "http://192.168.0.180:8080/shot.jpg"
-
-dataMatch = imageLoader()
-
-# print(len(matches))
-
-def card_detect(image, matches = dataMatch):
-    sift = cv2.SIFT_create()
-
-    #conver the np array to image
-    card = cv2.imread(image)
-
-    # card= cv2.imread() 
-
-    kp_image, desc_image = sift.detectAndCompute(card, None)
-
-    for logo in dataMatch:
-
-        kp_comp , desc_comp = sift.detectAndCompute(logo, None)
-        index_params = dict(algorithm=1, tree = 5)
-        search_params = dict(checks = 10)
-
-        flann = cv2.FlannBasedMatcher(index_params, search_params)
-        matches = flann.knnMatch(desc_image, desc_comp, k=2)
-
-        good_points = []
-        for m, n in matches:
-            if m.distance < 0.55*n.distance:
-                good_points.append(m)
-
-        img3 = cv2.drawMatches(card, kp_image, logo, kp_comp, good_points, None)
-        cv2.imshow("image", img3)
-
-
-    return len(good_points)
-
-
-while True:
-    time.sleep(4)
-    img_resp = requests.get(url)
-    img_arr = np.array(bytearray(img_resp.content), dtype=np.uint8)
-    img = cv2.imdecode(img_arr, -1)
-    img = imutils.resize(img, width=1000, height=1800)
-
-    frame = img #cap.read()[1]
-
-    cv2.imshow('Input', frame)
-
-    # Pre-process the frame (gray, blur, and threshold it)
-    pre_proc = position_image(frame)
-
-    #display the preprocessed image
-    cv2.imshow('Pre-processed', pre_proc)
-
-        
-
-    # Find and sort the contours of all cards in the frameq
-    actual_cards = detect_cards(pre_proc)
-
-    # If there are no contours, do nothing
-    if len(actual_cards) != 0:
-        print (str(len(actual_cards)) + " cards detected")
-        # Initialize a new "cards" list to assign the card objects.
-        # k indexes the newly made array of cards.
-        cards = []
-        k = 0
-
-        # For each contour detected, the function below returns a 
-        #straightened out snapshot of the card. This is all stored in the cards array
-        for i in range(len(actual_cards)):
-            cards.append(return_card(actual_cards[i],frame))
-            
-    # Display the number of cards detected on the frame
-    cv2.putText(frame, "Cards detected: " + str(len(actual_cards)), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-
-    cv2.imshow("Card Detection", frame)
-
-    # Check for key press to exit
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-    # time.sleep(1)
-
-# Release the video capture object and close any open windows
-# cap.release() 
-cv2.destroyAllWindows()
+    #Displaying the cards that were detected
+    for i in range(len(cards)):
+        plt.figure()
+        plt.imshow(cv2.cvtColor(cards[i], cv2.COLOR_BGR2RGB))
