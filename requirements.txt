@@ -6,3 +6,4 @@ tensorflow
 yolov5
 deuces
 treys
+requests
