@@ -28,20 +28,20 @@
 - Utilizes the Playing Cards Object Detection Dataset from Kaggle.com
 - Contains 20,000 images of playing cards in various lighting, orientations, and backgrounds
 
+- Kagle Dataset is not used after Yolo failed and therefore for efficency and speed we have scanned and cropped an entire deck of cards for feature matching
+
 ### Model
 
-- Uses YOLOv5, an object detection model for bounding box prediction and object classification
-- Training time is estimated to be around 8 hours for sufficient accuracy
+ We chose to implement the SIFT (Scale-Invariant Feature Transform) algorithm for detecting the content of the cards pulled from the card detector. 
 
 ### Poker Hand Evaluation
 
 - Calculates the best possible hand based on the board and the hand's exact rank
 - Employs a lookup table of 7,462 unique poker hand ranks for fast calculations
-- Leverages the openly-available deuces Python module
 
 ### Outcome
 
-- The completed poker program will be able to decide whether to bet or fold based on the calculated likelihood of the current hand winning.
+- The completed poker program will be able to determine your odds of winning given the river and your hand. 
 
 
 ## Environment Setup and Requirements
