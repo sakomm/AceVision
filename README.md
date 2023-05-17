@@ -97,3 +97,19 @@ Below are some of the key literature and resources we referred to for this proje
 | Rain Man 2.0 - Blackjack Robot | J. Grillo | [Blackjack Robot](https://hackaday.io/project/27639-rain-man-20-blackjack-robot.) | The project showcases a Raspberry Pi-based robot that can identify cards in its own hand and the dealer's hand, use a table to determine optimal plays, and employ card counting strategies. Although focused on blackjack, the card detection capability demonstrated with a 99% match rate provides insights applicable to our poker project.|
 | A method of computing winning probability for Texas Hold'em poker| Z. Xiaochuan, D. Song, Z. Hailu, L. He, W. Fan | [Computing Probability for Hold'em]([URL2](http://www.ijmlc.org/papers/275-LC009.pdf)) | The study presents an algorithm for computing winning probability in Texas Hold'em poker. It involves linear regression to approximate effective hand strength and classification of 5 or 6 cards to generate a feature vector. The algorithm and techniques such as reinforcement learning (RL), Q-learning, and Deep Q-Networks have potential for improving decision-making and training accuracy in our project. |
 | Image information and visual quality | H.R. Sheikh | [Image Recognition](https://ieeexplore.ieee.org/abstract/document/1576816?casa_token=DxQnaal5t3AAAAAA:wQq0qZWCt-_YJic-zXD-OxRedXb5AdJQtD1TspsTfOvGwCQKTly1e57sq51XhXep6tZXaWUI) | The provided link leads to an IEEE abstract discussing a method for hand strength evaluation in Texas Hold'em poker. The approach utilizes a machine learning algorithm trained on historical data to predict the winning probability of a poker hand, offering potential insights for our project. |
+
+## Usage of ChatGPT in this Project
+
+In the development of this project, we extensively used OpenAI's ChatGPT, specifically the GPT-4 model. Here's how it contributed:
+
+1. **Concept Clarification**: Whenever we encountered complex concepts related to machine learning, computer vision, or game theory, ChatGPT provided clear and concise explanations, which helped us understand and implement these concepts effectively.
+
+2. **Debugging Assistance**: ChatGPT was instrumental in helping us debug our code. When we encountered errors or issues, we consulted ChatGPT to get possible solutions or workarounds, which significantly expedited the debugging process.
+
+3. **Code Improvement**: ChatGPT also offered suggestions to enhance our code. It provided insights into better coding practices and suggested more efficient or cleaner ways to write certain parts of our code.
+
+4. **Project Documentation**: ChatGPT assisted us in documenting our project. It helped us formulate this README file and other necessary documentation, ensuring our project is understandable and accessible to others.
+
+ChatGPT proved to be a powerful tool, enhancing the speed and quality of our project development. We highly recommend its use in similar projects.
+
+
