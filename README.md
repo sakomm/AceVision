@@ -110,6 +110,6 @@ In the development of this project, we extensively used OpenAI's ChatGPT, specif
 
 4. **Project Documentation**: ChatGPT assisted us in documenting our project. It helped us formulate this README file and other necessary documentation, ensuring our project is understandable and accessible to others.
 
-ChatGPT proved to be a powerful tool, enhancing the speed and quality of our project development. We highly recommend its use in similar projects.
+ChatGPT proved to be a powerful tool, enhancing the speed and quality of our project development. We highly recommend its use in similar projects. 
 
 
